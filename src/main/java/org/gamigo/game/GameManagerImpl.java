@@ -108,7 +108,6 @@ public class GameManagerImpl implements GameManager {
 		System.out.println("Player A wins "+playerOneWins+" of "+numberOfMatches+" games");
 		System.out.println("Player B wins "+playerTwoWins+" of "+numberOfMatches+" games");
 		System.out.println("Tie "+ties+" of "+numberOfMatches+" games");
-		System.out.println("==========================================================");
 	}
 	
 	

@@ -1,7 +1,6 @@
 package org.gamigo.player;
 
 import java.security.SecureRandom;
-
 import org.gamigo.config.Move;
 import org.gamigo.config.Strategy;
 

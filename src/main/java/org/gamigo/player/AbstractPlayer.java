@@ -5,7 +5,6 @@ import org.gamigo.game.MoveGenerator;
 public abstract class AbstractPlayer implements MoveGenerator {
 	
 	private int id;
-//	public abstract Move generateMove(Strategy strategy);
 	
 	public AbstractPlayer() {
 		
