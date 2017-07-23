@@ -56,11 +56,6 @@ public class GameManagerImpl implements GameManager {
 		Move playerOneMove = playerOne.generateMove(paperStrategy);
 		// Player B always plays Randomly
 		Move playerTwoMove = playerTwo.generateMove(Strategy.RANDOM);
-		synchronized (this) {
-			System.out.println("p1 : "+playerOneMove);
-			System.out.println("p2 : "+playerTwoMove);
-			System.out.println("=======================");
-		}
 	    int compareMoves =  new MoveComparator().compare(playerOneMove, playerTwoMove);
 	    AbstractPlayer winnerPlayer = null;
     	switch (compareMoves) {
