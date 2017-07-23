@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.gamigo.config.Move;
 import org.gamigo.config.Strategy;
+import org.gamigo.exception.StrategyUndefinedException;
 import org.gamigo.player.AbstractPlayer;
 import org.gamigo.player.GenericPlayer;
 
@@ -27,7 +28,7 @@ public class GameManagerImpl implements GameManager {
 
 
 	@Override
-	public Void startGame() {
+	public Void startGame() throws StrategyUndefinedException {
 		playerOne = new GenericPlayer(1);
 		playerTwo = new GenericPlayer(2);
 		AbstractPlayer winnerPlayer = determineWinner(playerOne, playerTwo);
@@ -37,7 +38,7 @@ public class GameManagerImpl implements GameManager {
 	}
 	
 	@Override
-	public Void startGame(AbstractPlayer playerOne, AbstractPlayer playerTwo) {
+	public Void startGame(AbstractPlayer playerOne, AbstractPlayer playerTwo) throws StrategyUndefinedException {
 		
 		AbstractPlayer winnerPlayer = determineWinner(playerOne, playerTwo);
 		saveResult(winnerPlayer);
@@ -46,14 +47,11 @@ public class GameManagerImpl implements GameManager {
 	}
 	
 	@Override
-	public AbstractPlayer determineWinner(AbstractPlayer playerOne, AbstractPlayer playerTwo) {
+	public AbstractPlayer determineWinner(AbstractPlayer playerOne, AbstractPlayer playerTwo) throws StrategyUndefinedException {
 		this.playerOne = playerOne;
 		this.playerTwo = playerTwo;
 		Move playerOneMove = playerOne.generateMove(Strategy.FIXED);
 		Move playerTwoMove = playerTwo.generateMove(Strategy.RANDOM);
-		System.out.println("Player one move : "+playerOneMove.name());
-		System.out.println("Player two move : "+playerTwoMove.name());
-		System.out.println("================================");
 	    int compareMoves =  new MoveComparator().compare(playerOneMove, playerTwoMove);
 	    AbstractPlayer winnerPlayer = null;
     	switch (compareMoves) {
@@ -105,9 +103,9 @@ public class GameManagerImpl implements GameManager {
 
 	@Override
 	public void printResult() {
-		System.out.println("Player A wins "+playerOneWins+" of "+numberOfMatches+" games");
-		System.out.println("Player B wins "+playerTwoWins+" of "+numberOfMatches+" games");
-		System.out.println("Tie "+ties+" of "+numberOfMatches+" games");
+		System.out.printf ("Player A wins %d of %d games %n", playerOneWins.get(), numberOfMatches); 
+		System.out.printf ("Player B wins %d of %d games %n", playerTwoWins.get(), numberOfMatches);
+		System.out.printf ("Tie %d of %d games %n", ties.get(), numberOfMatches);
 	}
 	
 	

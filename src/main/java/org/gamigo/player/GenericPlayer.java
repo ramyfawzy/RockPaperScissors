@@ -1,8 +1,8 @@
 package org.gamigo.player;
 
-import java.security.SecureRandom;
 import org.gamigo.config.Move;
 import org.gamigo.config.Strategy;
+import org.gamigo.exception.StrategyUndefinedException;
 
 public class GenericPlayer extends AbstractPlayer{
 
@@ -11,22 +11,15 @@ public class GenericPlayer extends AbstractPlayer{
 	}
 
 	@Override
-	public Move generateMove(Strategy strategy) {
+	public Move generateMove(Strategy strategy) throws StrategyUndefinedException {
 		switch(strategy) {
 		 case FIXED:
-			 return Move.PAPER;
+			 return strategy.getMove();
 	     case RANDOM:
-	    	 return generateRandomMove();
+	    	 return strategy.generateRandomMove();
+	     default:
+	    	 throw new StrategyUndefinedException();
 		}
 		
-		return null;
 	}
-
-	private Move generateRandomMove() {
-		 Move[] moves = Move.values();
-	     SecureRandom secureRandom = new SecureRandom();
-	     int index = secureRandom.nextInt(moves.length);
-	     return moves[index];
-	}
-
 }

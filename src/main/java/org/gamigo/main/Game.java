@@ -11,7 +11,7 @@ import org.gamigo.game.GameManager;
 import org.gamigo.game.GameManagerImpl;
 
 public class Game {
-	static int numberOfMatches = 10000;
+	static int numberOfMatches = 100;
 	public static void main(String[] args) throws InterruptedException {
 		
 		GameManager gameManager = GameManagerImpl.getInstance(numberOfMatches);
@@ -27,19 +27,18 @@ public class Game {
 	
 	private static void shutdown(ExecutorService executorService) {
 		try {
-		    System.out.println("Game is shutting down ...");
 		    executorService.shutdown();
 		    executorService.awaitTermination(5, TimeUnit.SECONDS);
 		}
 		catch (InterruptedException e) {
-		    System.err.println("tasks interrupted");
+			e.printStackTrace();
 		}
 		finally {
 		    if (!executorService.isTerminated()) {
 		        System.err.println("cancel non-finished tasks");
 		    }
 		    executorService.shutdownNow();
-		    System.out.println("shutdown finished");
+		    System.out.println("Game has ended.");
 		}
 	}
 }
