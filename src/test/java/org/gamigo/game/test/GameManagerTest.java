@@ -39,7 +39,9 @@ public class GameManagerTest {
 	@Test
 	public void testFixedStrategy() throws StrategyUndefinedException {
 		AbstractPlayer a = new GenericPlayer(1);
-		Move aMove = a.generateMove(Strategy.FIXED);
+		Strategy rockStrategy = Strategy.FIXED;
+		rockStrategy.setMove(Move.PAPER);
+		Move aMove = a.generateMove(rockStrategy);
 		assertNotNull(aMove);
 		assertTrue("The move must be Paper !", aMove.equals(Move.PAPER));
 	}

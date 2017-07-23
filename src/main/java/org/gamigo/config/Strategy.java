@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 
 public enum Strategy {
 	
-	FIXED(Move.PAPER), RANDOM();
+	FIXED, RANDOM;
 	
 	private Move move;
 	

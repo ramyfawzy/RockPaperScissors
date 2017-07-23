@@ -50,8 +50,17 @@ public class GameManagerImpl implements GameManager {
 	public AbstractPlayer determineWinner(AbstractPlayer playerOne, AbstractPlayer playerTwo) throws StrategyUndefinedException {
 		this.playerOne = playerOne;
 		this.playerTwo = playerTwo;
-		Move playerOneMove = playerOne.generateMove(Strategy.FIXED);
+		Strategy paperStrategy = Strategy.FIXED;
+		paperStrategy.setMove(Move.PAPER);
+		// Player A always plays PAPER
+		Move playerOneMove = playerOne.generateMove(paperStrategy);
+		// Player B always plays Randomly
 		Move playerTwoMove = playerTwo.generateMove(Strategy.RANDOM);
+		synchronized (this) {
+			System.out.println("p1 : "+playerOneMove);
+			System.out.println("p2 : "+playerTwoMove);
+			System.out.println("=======================");
+		}
 	    int compareMoves =  new MoveComparator().compare(playerOneMove, playerTwoMove);
 	    AbstractPlayer winnerPlayer = null;
     	switch (compareMoves) {
