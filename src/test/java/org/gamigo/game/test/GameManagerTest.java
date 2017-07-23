@@ -51,7 +51,7 @@ public class GameManagerTest {
 		AbstractPlayer a = new GenericPlayer(1);
 		Move aMove = a.generateMove(Strategy.RANDOM);
 		assertNotNull(aMove);
-		assertTrue("The move must be Paper !", (aMove.equals(Move.PAPER) || aMove.equals(Move.ROCK) || aMove.equals(Move.SCISSORS)));
+		assertTrue("Move must be Paper,Rock or Scissors !", (aMove.equals(Move.PAPER) || aMove.equals(Move.ROCK) || aMove.equals(Move.SCISSORS)));
 	}
 
 	@Test
